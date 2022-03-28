@@ -1,0 +1,12 @@
+@startuml
+
+ActivityThread-> ActivityThread:performLaunchActivity()
+
+ActivityThread-> ContextImpl:createActivityContext()
+ActivityThread-> ContextImpl:createAppContext()
+
+ResourcesManager-> ResourcesManager:createResourcesImpl()
+ResourcesManager-> ResourcesManager:createAssetManager()
+
+
+@enduml
