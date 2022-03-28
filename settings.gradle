@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "CSKinApplication"
 include ':app'
 include ':SkinPlugin'
+include ':SkinResource'
