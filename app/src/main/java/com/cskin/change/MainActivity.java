@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    static final Class<?>[] mConstructorSignature = new Class[]{
+            Context.class, AttributeSet.class};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +23,20 @@ public class MainActivity extends AppCompatActivity {
             @Nullable
             @Override
             public View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-                Class<? extends View> clazz = Class.forName(name, false,
-                        mContext.getClassLoader()).asSubclass(View.class);
-                if (-1 == name.indexOf('.')) {
-                    view = createView(name, "android.view.", attrs);
-                } else {
-                    view = createView(context, name, null, attrs);
+                try {
+                    Class<? extends View> clazz = Class.forName(name, false,
+                            context.getClassLoader()).asSubclass(View.class);
+                    View view = null;
+//                    if (-1 == name.indexOf('.')) {
+//                        view = createView(name, "android.view.", attrs);
+//                    } else {
+//                        view = createView(context, name, null, attrs);
+//                    }
+                    return view;
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
+
                 return null;
             }
 
