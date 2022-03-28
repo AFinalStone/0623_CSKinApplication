@@ -13,6 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SkinPlugin" />
+            <option value="$PROJECT_DIR$/SkinResource" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

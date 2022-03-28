@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SkinResource</string>
+    <string name="text_hello">你好 世界</string>
 </resources>
