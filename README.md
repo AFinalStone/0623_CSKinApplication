@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+### 二、拦截view的绘制流
 
 ### 验证流程
 
@@ -51,9 +52,8 @@ SkinResource模块为皮肤插件化模块，编译该模块生成[app_plugin.ap
 
 ### 二、拦截view的绘制过程
 
-view的绘制过程
-
-1、通过application获取所有activity生命周期的监听事件 2、在activity的onCreate方法中获取activity的LayoutInflact，设置SetFactory2()
+1、通过application获取所有activity生命周期的监听事件 
+2、在activity的onCreate方法中获取activity的LayoutInflact，设置SetFactory2()
 3、创建SkinLayoutInflact继承LayoutInflact，具体实现onCreateView()
 4、在onCreateView()方法中分别创建SDKView和自定义View 5、view创建成功之后，遍历该view的AttributeSet
 6、使用AttributeSet.getAttributeValue()获取AttributeSet.getAttributeName()相对应的app资源id
