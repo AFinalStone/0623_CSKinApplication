@@ -154,7 +154,7 @@ public final class SkinManager {
     /**
      * 使用外部资源及时刷新当前页面的UI皮肤
      */
-    public void applyActivitySkin(Activity activity) {
+    public void changeActivitySkin(Activity activity) {
         SkinLayoutFactory skinLayoutFactory = mActivitySkinLayouts.get(activity);
         if (skinLayoutFactory != null) {
             skinLayoutFactory.getSkinAttribute().applySkin();
@@ -203,10 +203,13 @@ public final class SkinManager {
     // 返回值特殊情况：可能是color / drawable / mipmap
     public Object getBackgroundOrSrc(int resourceId) {
         // 需要获取当前属性的类型名Resources.getResourceTypeName(resourceId)再判断
+        if (resourceId == 0) {
+            return null;
+        }
         String resourceTypeName = mDefaultResource.getResourceTypeName(resourceId);
         switch (resourceTypeName) {
             case "color":
-            return getColor(resourceId);
+                return getColor(resourceId);
             case "mipmap": // drawable / mipmap
             case "drawable":
                 return getDrawableOrMipMap(resourceId);

@@ -1,6 +1,7 @@
 package com.cskin.change;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Environment;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cskin.skinplugin.SkinManager;
@@ -20,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // 运行时权限申请（6.0+）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
             if (checkSelfPermission(perms[0]) == PackageManager.PERMISSION_DENIED) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 if (apkPluginFile.exists()) {
                     String apkPluginResPath = apkPluginFile.getAbsolutePath();
                     SkinManager.getInstance().loadSkinResource(apkPluginResPath);
-                    SkinManager.getInstance().applyActivitySkin(MainActivity.this);
+                    SkinManager.getInstance().changeActivitySkin(MainActivity.this);
                 }
             }
         });
@@ -42,7 +43,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SkinManager.getInstance().loadSkinResource("");
-                SkinManager.getInstance().applyActivitySkin(MainActivity.this);
+                SkinManager.getInstance().changeActivitySkin(MainActivity.this);
+            }
+        });
+        findViewById(R.id.btn_show_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("标题")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).create();
+                View view = getLayoutInflater().inflate(R.layout.alert_dialog_main, null, false);
+                alertDialog.setView(view);
+                alertDialog.show();
             }
         });
     }

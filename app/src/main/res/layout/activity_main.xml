@@ -34,6 +34,11 @@
         android:layout_marginTop="20dp"
         android:src="@mipmap/background_01" />
 
+    <Button
+        android:id="@+id/btn_show_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示弹窗" />
 
     <Button
         android:id="@+id/btn_back_defalut_skin"
