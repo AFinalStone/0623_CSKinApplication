@@ -1,6 +1,6 @@
 ### 一、Activity和Window、DecorView的关系
 
-![关系图](picture/activity_window_decorview.png)
+![关系图](activity_window_decorview.png)
 
 ### 二、拦截view的绘制过程
 
@@ -54,18 +54,15 @@ ResourcesManager-> ResourcesManager:createAssetManager()
 
 3、对外提供获取插件化资源的各种方法
 
-### 二、加载皮肤资源库
+### 四、本项目验证流程
 
-```sequence
+SkinResource模块为皮肤插件化模块，编译该模块生成[app_plugin.apk](SkinResource/release)
 
-对象A->对象B: 对象B你好吗?（请求）
-
-Note right of 对象B: 对象B的描述
-
-Note left of 对象A: 对象A的描述(提示)
-
-对象B-->对象A: 我很好(响应)
-
-对象A->对象B: 你真的好吗？
-
+```aidl
+adb push app_plugin.apk sdcard
 ```
+
+1、使用adb把该app_plugin.apk复制到手机SD卡根目录
+
+2、然后再运行app模块，授权允许访问外部SDK，点击换肤按钮即可实现换肤
+
