@@ -1,11 +1,11 @@
 ### 一、Activity和Window、DecorView的关系
 
-![关系图](picture/activity_window_decorview.png)
+![关系图](https://github.com/AFinalStone/CSKinApplication/blob/main/picture/activity_window_decorview.png)
 
-### 二、拦截view的绘制过程
+### 二、拦截view的绘制流
 
 view的绘制过程
-
+![绘制流程图](https://github.com/AFinalStone/CSKinApplication/blob/main/picture/view的创建流程.png)
 ```sequence
 -> LayoutInflact:setContentView()
 LayoutInflact -> LayoutInflact:inflate()
@@ -33,6 +33,8 @@ LayoutInflact -> LayoutInflact:CreateView()
 ### 二、加载皮肤资源库
 
 AssetsManager的创建过程
+
+![创建流程图](https://github.com/AFinalStone/CSKinApplication/blob/main/picture/assetManager的创建流程.png)
 
 ```sequence
 @startuml
