@@ -6,8 +6,7 @@
 
 view的绘制过程
 
-@startuml
-
+```sequence
 -> LayoutInflact:setContentView()
 LayoutInflact -> LayoutInflact:inflate()
 LayoutInflact -> LayoutInflact:createViewFromTag()
@@ -17,8 +16,7 @@ LayoutInflact -> LayoutInflact:child_createViewFromTag()
 LayoutInflact -> LayoutInflact:tryCreateView()
 LayoutInflact -> LayoutInflact:onCreateView()
 LayoutInflact -> LayoutInflact:CreateView()
-
-@enduml
+```
 
 1、获取activity的LayoutInflact，设置SetFactory2()
 2、创建SkinLayoutInflact继承LayoutInflact，具体实现onCreateView()
@@ -36,6 +34,7 @@ LayoutInflact -> LayoutInflact:CreateView()
 
 AssetsManager的创建过程
 
+```sequence
 @startuml
 
 ActivityThread-> ActivityThread:performLaunchActivity()
@@ -47,6 +46,7 @@ ResourcesManager-> ResourcesManager:createResourcesImpl()
 ResourcesManager-> ResourcesManager:createAssetManager()
 
 @enduml
+```
 
 1、通过反射创建AssetsManager实例，并通过反射调用其addAssetPath方法
 
