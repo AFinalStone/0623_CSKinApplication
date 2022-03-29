@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_hello_color">#FF000000</color>
+    <color name="btn_change_skin_color">#FF00FF00</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.cskin.skinplugin;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -7,19 +8,20 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 
+import com.cskin.skinplugin.core.SkinLayoutFactory;
 import com.cskin.skinplugin.model.SkinCache;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public final class SkinManager {
     private static SkinManager INSTANCE;
 
-    /**
-     * 单例方法，目的是初始化app内置资源（越早越好，用户的操作可能是：换肤后的第2次冷启动）
-     */
     public static void init(Application application) {
         if (INSTANCE == null) {
             synchronized (SkinManager.class) {
@@ -35,6 +37,7 @@ public final class SkinManager {
     private Resources mSkinResource;
     private String mSkinPackageName; // 皮肤包资源所在包名（注：皮肤包不在app内，也不限包名）
     private HashMap<String, SkinCache> mResourcesCache;
+    private HashMap<Activity, SkinLayoutFactory> mActivitySkinLayouts;
     private boolean isDefaultSkin = true; // 应用默认皮肤（app内置）
     private final String Add_Asset_Method = "addAssetPath";
 
@@ -42,10 +45,68 @@ public final class SkinManager {
         mApplication = application;
         mDefaultResource = application.getResources();
         mResourcesCache = new HashMap<>();
+        mActivitySkinLayouts = new HashMap<>();
+        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                try {
+                    hookLayoutInflater(activity);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                mActivitySkinLayouts.remove(activity);
+            }
+        });
     }
 
     public static SkinManager getInstance() {
         return INSTANCE;
+    }
+
+    /**
+     * Hook页面的LayoutInflater
+     *
+     * @param activity
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
+    public void hookLayoutInflater(Activity activity) throws NoSuchFieldException, IllegalAccessException {
+        LayoutInflater layoutInflater = activity.getLayoutInflater();
+        Field mFactorySet = LayoutInflater.class.getDeclaredField("mFactorySet");
+        mFactorySet.setAccessible(true);
+        mFactorySet.set(layoutInflater, false);
+        SkinLayoutFactory skinLayoutFactory = new SkinLayoutFactory(activity);
+        layoutInflater.setFactory2(skinLayoutFactory);
+        mActivitySkinLayouts.put(activity, skinLayoutFactory);
     }
 
     /**
@@ -68,12 +129,12 @@ public final class SkinManager {
         }
         try {
             AssetManager assetManager = AssetManager.class.newInstance();
-            Method method = AssetManager.class.getMethod(Add_Asset_Method);
+            Method method = AssetManager.class.getDeclaredMethod(Add_Asset_Method, String.class);
             method.setAccessible(true);
             method.invoke(assetManager, skinPath);
             Resources resources = mApplication.getResources();
             mSkinResource = new Resources(assetManager, resources.getDisplayMetrics(), resources.getConfiguration());
-            // 根据apk文件路径（皮肤包也是apk文件），获取该应用的包名。兼容5.0 - 9.0（亲测）
+            // 根据apk文件路径获取该应用的包名。兼容5.0 - 12.0
             mSkinPackageName = mApplication.getPackageManager().getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES).packageName;
             // 无法获取皮肤包应用的包名，则加载app内置资源
             isDefaultSkin = TextUtils.isEmpty(mSkinPackageName);
@@ -87,6 +148,16 @@ public final class SkinManager {
         } catch (Exception e) {
             e.printStackTrace();
             isDefaultSkin = true;
+        }
+    }
+
+    /**
+     * 使用外部资源及时刷新当前页面的UI皮肤
+     */
+    public void applyActivitySkin(Activity activity) {
+        SkinLayoutFactory skinLayoutFactory = mActivitySkinLayouts.get(activity);
+        if (skinLayoutFactory != null) {
+            skinLayoutFactory.getSkinAttribute().applySkin();
         }
     }
 

@@ -15,8 +15,8 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
 
     private String[] mSDKViewPrevName = {
             "android.view.",
-            "android.webkit.",
-            "android.widget."
+            "android.widget.",
+            "android.webkit."
     };
     static final Class<?>[] mConstructorSignature = new Class[]{
             Context.class, AttributeSet.class};
@@ -31,15 +31,20 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
         this.mSkinAttribute = new SkinAttribute();
     }
 
+
+    public SkinAttribute getSkinAttribute() {
+        return mSkinAttribute;
+    }
+
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         View view;
         if (-1 == name.indexOf('.')) {
             view = createSDkView(name, context, attrs);
         } else {
-            view = createView(name, null, attrs);
+            view = createView(name, context, attrs);
         }
-        if (view != null && view instanceof ViewsNoSupportChangeSkin) {
+        if (view != null) {
             mSkinAttribute.look(view, attrs);
         }
         return view;
@@ -54,8 +59,8 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
     private View createSDkView(String name, Context context, AttributeSet attrs) {
         View view = null;
         for (String prevName : mSDKViewPrevName) {
-            name = prevName + name;
-            view = createView(name, context, attrs);
+            String realName = prevName + name;
+            view = createView(realName, context, attrs);
             if (null != view) {
                 break;
             }
@@ -69,7 +74,7 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
         try {
             view = constructor.newInstance(context, attrs);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return view;
     }
@@ -84,7 +89,7 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
                 constructor.setAccessible(true);
                 mConstructorMap.put(name, constructor);
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
         return constructor;

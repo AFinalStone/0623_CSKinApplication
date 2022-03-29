@@ -19,11 +19,12 @@ public class SkinAttribute {
         mAttributes.add("src");
         mAttributes.add("background");
         mAttributes.add("drawable");
+        mSkinViews = new ArrayList<>();
     }
 
     public void look(View view, AttributeSet attrs) {
         List<SkinPair> skinPars = new ArrayList<>();
-        for (int i = 0; i < attrs.getAttributeCount() - 1; i++) {
+        for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attributeName = attrs.getAttributeName(i);
             if (mAttributes.contains(attributeName)) {
                 String attributeValue = attrs.getAttributeValue(i);

@@ -3,13 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_hello"
-        android:textColor="@color/text_hello_color" />
+        style="@style/UikitTextView"
+        android:text="@string/text_hello" />
 
+    <com.cskin.change.view.MyTextView
+        style="@style/UikitTextView"
+        android:text="@string/text_hello" />
+
+    <Button
+        android:id="@+id/btn_change_skin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/change_skin_btn_bg"
+        android:text="@string/text_change_skin"
+        android:textColor="@color/btn_change_skin_color"
+        android:textSize="@dimen/common_text_size" />
 </LinearLayout>
