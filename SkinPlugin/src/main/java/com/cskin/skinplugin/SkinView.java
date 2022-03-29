@@ -35,9 +35,9 @@ public class SkinView {
                 case "src":
                     Object src = SkinManager.getInstance().getBackgroundOrSrc(skinPair.getResourceId());
                     if (src instanceof Integer) {
-                        ((ImageView) src).setImageDrawable(new ColorDrawable((Integer) src));
+                        ((ImageView) view).setImageDrawable(new ColorDrawable((Integer) src));
                     } else {
-                        ((ImageView) src).setImageDrawable((Drawable) src);
+                        ((ImageView) view).setImageDrawable((Drawable) src);
                     }
                     break;
                 case "background":

@@ -1,6 +1,6 @@
 ### 一、Activity和Window、DecorView的关系
 
-![关系图](activity_window_decorview.png)
+![关系图](picture/activity_window_decorview.png)
 
 ### 二、拦截view的绘制过程
 
@@ -58,9 +58,7 @@ ResourcesManager-> ResourcesManager:createAssetManager()
 
 SkinResource模块为皮肤插件化模块，编译该模块生成[app_plugin.apk](SkinResource/release)
 
-```aidl
-adb push app_plugin.apk sdcard
-```
+> adb push app_plugin.apk sdcard
 
 1、使用adb把该app_plugin.apk复制到手机SD卡根目录
 

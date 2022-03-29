@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        findViewById(R.id.btn_back_defalut_skin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SkinManager.getInstance().loadSkinResource("");
+                SkinManager.getInstance().applyActivitySkin(MainActivity.this);
+            }
+        });
     }
 
     @Override

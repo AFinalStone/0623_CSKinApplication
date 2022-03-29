@@ -206,8 +206,7 @@ public final class SkinManager {
         String resourceTypeName = mDefaultResource.getResourceTypeName(resourceId);
         switch (resourceTypeName) {
             case "color":
-                return getColor(resourceId);
-
+            return getColor(resourceId);
             case "mipmap": // drawable / mipmap
             case "drawable":
                 return getDrawableOrMipMap(resourceId);

@@ -28,14 +28,13 @@ public class SkinAttribute {
             String attributeName = attrs.getAttributeName(i);
             if (mAttributes.contains(attributeName)) {
                 String attributeValue = attrs.getAttributeValue(i);
-                if (attributeValue.startsWith("#") || attributeValue.startsWith("?")) {
-                    continue;
+                if (attributeValue.startsWith("@")) {//其他还有?(属性)，#(RGB)
+                    int resId = Integer.parseInt(attributeValue.substring(1));
+                    SkinPair skinPair = new SkinPair();
+                    skinPair.setAttributeName(attributeName);
+                    skinPair.setResourceId(resId);
+                    skinPars.add(skinPair);
                 }
-                int resId = Integer.parseInt(attributeValue.substring(1));
-                SkinPair skinPair = new SkinPair();
-                skinPair.setAttributeName(attributeName);
-                skinPair.setResourceId(resId);
-                skinPars.add(skinPair);
             }
         }
         if (skinPars.size() > 0) {
