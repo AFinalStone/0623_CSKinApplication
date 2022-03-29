@@ -1,8 +1,8 @@
 ### 一、Activity和Window、DecorView的关系
 
-![关系图](picture/activity_window_decorview.jpg)
+![关系图](picture/activity_window_decorview.png)
 
-### 一、拦截view的绘制过程
+### 二、拦截view的绘制过程
 
 view的绘制过程
 
@@ -53,3 +53,19 @@ ResourcesManager-> ResourcesManager:createAssetManager()
 2、使用AssetsManager的实例创建插件资源相对应的对象resource
 
 3、对外提供获取插件化资源的各种方法
+
+### 二、加载皮肤资源库
+
+```sequence
+
+对象A->对象B: 对象B你好吗?（请求）
+
+Note right of 对象B: 对象B的描述
+
+Note left of 对象A: 对象A的描述(提示)
+
+对象B-->对象A: 我很好(响应)
+
+对象A->对象B: 你真的好吗？
+
+```
