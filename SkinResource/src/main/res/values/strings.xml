@@ -1,4 +1,5 @@
 <resources>
+    <string name="a">皮肤包名称</string>
     <string name="app_name">SkinResource</string>
     <string name="text_hello">Hello World</string>
     <string name="text_change_skin">Change Skin</string>

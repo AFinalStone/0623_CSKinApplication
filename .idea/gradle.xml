@@ -8,13 +8,16 @@
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$USER_HOME$/.gradle/wrapper/dists/gradle-5.4.1-all/3221gyojl5jsh0helicew7rwx/gradle-5.4.1" />
-        <option name="gradleJvm" value="11 (2)" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Plugin_Resource" />
+            <option value="$PROJECT_DIR$/Plugin_Tools" />
             <option value="$PROJECT_DIR$/SkinPlugin" />
             <option value="$PROJECT_DIR$/SkinResource" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app_01" />
+            <option value="$PROJECT_DIR$/app_02" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">动态换肤</string>
+    <string name="text_hello">你好世界</string>
+    <string name="text_change_skin">修改皮肤</string>
+</resources>

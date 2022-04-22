@@ -12,7 +12,10 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "CSKinApplication"
-include ':app'
+rootProject.name = "Android0202_Plugin_CSKinApplication"
+include ':app_01'
+include ':app_02'
 include ':SkinPlugin'
 include ':SkinResource'
+include ':Plugin_Tools'
+include ':Plugin_Resource'
