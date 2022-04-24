@@ -11,8 +11,7 @@ ResourcesManager -> ResourcesManager:getOrCreateResources()
 ResourcesManager-> ResourcesManager:createResourcesImpl()
 ResourcesManager-> ResourcesManager:createAssetManager()
 ResourcesManager-> ResourcesManager:loadApkAssets()
-ResourcesManager-> AssetsManager:setAssetsPath()[sdk28之后资源插件化关键方法]
+ResourcesManager-> AssetsManager:addAssetPath()[sdk28之后此方法废弃，官方推荐setApkAssets]
 ResourcesManager-> AssetsManager:ApkAssets:loadOverlayFromPath()
-ResourcesManager--> AssetsManager:addAssetsPath()[sdk23之后资源插件化关键方法]
 
 @enduml
